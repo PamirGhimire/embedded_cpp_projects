@@ -1,0 +1,39 @@
+# Bazel build output
+bazel-*
+*.runfiles
+*.pyc
+*.log
+
+# C++ build artifacts
+*.o
+*.so
+*.a
+*.out
+
+# Python artifacts
+__pycache__/
+*.pyo
+*.pyd
+
+# Editor / IDE
+.vscode/
+*.code-workspace
+
+# Dev container artifacts
+.devcontainer/devcontainer.json
+.devcontainer/Dockerfile
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git lock and backup
+*.swp
+*.swo
+*.bak
+*~
+
+# Logs and temp files
+*.tmp
+*.log
+*.pid
