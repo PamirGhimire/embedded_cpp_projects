@@ -1,0 +1,16 @@
+{
+  "name": "pltfmproj_devcontainer",
+  "build":{
+    "dockerfile": "Dockerfile"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": ["ms-python.python", "ms-vscode.cpptools", "bazelbuild.vscode-bazel"]
+    }
+  }
+}
