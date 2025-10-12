@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     unzip \
-    openjdk-11-jdk
+    openjdk-11-jdk \
+    bsdmainutils
 
 # Add Bazel's GPG key and repository
 RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor -o /usr/share/keyrings/bazel-archive-keyring.gpg && \

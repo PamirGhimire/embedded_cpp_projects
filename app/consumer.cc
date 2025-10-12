@@ -7,6 +7,8 @@
 #include <sstream>
 #include <vector>
 #include <cstring>
+#include <chrono>
+#include <thread>
 
 static const char* DAEMON_SOCK = "/tmp/ipc_daemon.sock";
 
@@ -54,9 +56,18 @@ int main() {
             if (peer_shm != "-") {
                 // open the shm ring
                 std::cout << "opening shared ring: " << peer_shm << "\n";
-                ring_ptr = SharedRing::create_or_open(peer_shm, 0, 0, false);
-                if (!ring_ptr) { std::cerr << "open shm failed\n"; continue; }
-                // consume until exhausted
+                for (int i = 0; i < 20; ++i) 
+                {
+                    ring_ptr = SharedRing::create_or_open(peer_shm, 1, 1, false);
+                    if (ring_ptr) break;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                }
+                if (!ring_ptr) {
+                    std::cerr << "Failed to open shared ring after retries\n";
+                    continue;
+                }
+
+                // consume until exhausted (read the slot at RingHeader->head)
                 std::vector<uint8_t> b;
                 while (ring_ptr->read_message(b)) {
                     std::string s(b.begin(), b.end());
