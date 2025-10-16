@@ -1,6 +1,6 @@
 cc_binary(
     name = "ipc_daemon",
     srcs = ["daemon.cc"],
-    deps = ["//ipc:ipc_common"],
+    deps = ["//shm_ipc_with_SD/ipc:ipc_common"],
     copts = ["-std=c++17"],
 )
